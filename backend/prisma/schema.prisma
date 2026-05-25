@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  NEW
+  ACTIVE
+  CLOSED
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  role       UserRole @default(USER)
+  leads      Lead[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Lead {
+  id         String      @id @default(uuid())
+  name       String
+  email      String
+  phone      String
+  company    String
+  status     LeadStatus  @default(NEW)
+  notes      String?
+  ownerId    String
+  owner      User        @relation(fields: [ownerId], references: [id])
+  activities Activity[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Activity {
+  id          String   @id @default(uuid())
+  action      String
+  description String
+  leadId      String?
+  lead        Lead?     @relation(fields: [leadId], references: [id])
+  createdAt   DateTime @default(now())
+}

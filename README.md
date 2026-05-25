@@ -1,6 +1,8 @@
 # Lead Management Dashboard
 
-A production-ready full-stack Lead Management Dashboard designed to demonstrate scalable application architecture, secure authentication, API integrations, database design, deployment readiness, and AI-assisted feature implementation.
+A production-ready full-stack Lead Management Dashboard designed to demonstrate scalable application architecture, secure authentication, API integrations, relational database design, deployment readiness, CI/CD automation, and AI-assisted application functionality.
+
+---
 
 ## Live Application
 
@@ -17,26 +19,26 @@ https://github.com/Sangamesh191097/lead-management-dashboard
 
 ## Project Overview
 
-The Lead Management Dashboard is a CRM-style web application built to manage lead workflows efficiently through a modern, responsive dashboard experience.
+The Lead Management Dashboard is a CRM-style web application built to manage lead workflows through a modern dashboard interface.
 
-The platform enables authenticated users to manage lead records, monitor activity, generate AI-powered follow-up communication, and interact with real-world API integrations in a production-hosted environment.
+The application enables authenticated users to manage lead records, monitor activity history, generate AI-powered follow-up communication, and interact with real-world API integrations in a production-hosted environment.
 
-The implementation focuses on engineering best practices including modular architecture, separation of concerns, cloud deployment, CI/CD automation, environment-based configuration, and maintainable backend design.
+This implementation focuses on production engineering practices including modular architecture, layered backend design, cloud deployment, CI/CD automation, environment-based configuration, secure authentication, and scalable code organization.
 
 ---
 
 ## Business Objectives
 
-This implementation was designed to demonstrate practical engineering capability across the following areas:
+This implementation demonstrates engineering capability across:
 
 - Full-stack application development
 - Scalable project architecture
 - API integration and third-party service consumption
 - Relational database design and persistence
-- Secure authentication and route protection
-- Production deployment and environment management
+- Secure authentication and protected route access
+- Production deployment and cloud hosting
 - CI/CD automation
-- AI-assisted application functionality
+- AI-assisted application workflows
 - Ownership and problem-solving execution
 
 ---
@@ -45,17 +47,16 @@ This implementation was designed to demonstrate practical engineering capability
 
 ### Authentication
 
-A secure JWT-based authentication system has been implemented to protect application access.
+A secure JWT-based authentication system protects application access.
 
 Capabilities include:
 
-- User registration
 - User login
 - User logout
-- Token-based authentication
+- JWT token authentication
 - Protected route access
 - Authorization middleware
-- Secure password hashing
+- Secure password hashing using bcrypt
 
 Authentication flow:
 
@@ -66,7 +67,7 @@ Credential Validation
    ↓
 JWT Token Generation
    ↓
-Client Token Storage
+Token Stored on Client
    ↓
 Authenticated API Access
 ```
@@ -85,15 +86,15 @@ Dashboard metrics include:
 - Recent Activity Timeline
 - Live Weather Data
 
-This module serves as the central operational view for lead management activity.
+This serves as the operational overview of the CRM workflow.
 
 ---
 
 ### Lead Management
 
-The lead management module provides full lifecycle CRUD functionality.
+The lead management module supports full lifecycle CRUD operations.
 
-Supported capabilities:
+Capabilities:
 
 - Lead creation
 - Lead editing
@@ -103,7 +104,7 @@ Supported capabilities:
 - Pagination
 - Form validation
 
-Lead data model includes:
+Lead data includes:
 
 - Name
 - Email
@@ -113,49 +114,49 @@ Lead data model includes:
 - Notes
 - Created Date
 
-This module forms the core CRM workflow of the application.
+This module forms the core CRM functionality.
 
 ---
 
 ### AI Follow-Up Message Generator
 
-An AI-powered follow-up generation module has been integrated to support communication workflows.
+An AI-powered communication assistant has been integrated to support outreach workflows.
 
-This feature generates contextual follow-up messaging using lead information, helping simulate real-world sales and outreach scenarios.
+This feature generates contextual follow-up messaging using lead data.
 
 Use cases include:
 
-- Lead follow-up communication
+- Sales follow-up communication
 - Outreach drafting
-- Sales engagement messaging
-- Time-saving response generation
+- Lead nurturing workflows
+- Quick communication generation
 
 Implementation details:
 
-- Prompt-based generation
-- Backend AI integration
-- Modal-driven frontend workflow
-- Dynamic contextual responses
+- Backend AI API integration
+- Prompt-driven contextual generation
+- Modal-based frontend interaction
+- Dynamic response generation
 
-AI provider used:
+AI provider:
 
 Groq API
 
-This was selected for fast inference performance and developer accessibility.
+The provider was selected for low-latency inference and developer-friendly API access.
 
 ---
 
 ### Activity Tracking
 
-A structured activity logging mechanism provides audit visibility into lead lifecycle actions.
+A structured audit trail records lead lifecycle activity.
 
-Tracked events include:
+Tracked events:
 
 - Lead creation
 - Lead updates
 - Lead deletion
 
-Examples:
+Example activity logs:
 
 ```text
 Rahul was added as a new lead
@@ -163,29 +164,72 @@ Rahul: company changed from ABC to XYZ
 Rahul was deleted
 ```
 
-This improves traceability and operational transparency.
+This improves transparency, operational traceability, and audit visibility.
 
 ---
 
 ### External API Integration
 
-The application integrates public external APIs to demonstrate real-world service consumption.
+Public third-party API integrations are used to demonstrate real-world service consumption.
 
 #### OpenWeather API
 
 Used for:
 
-- Live weather display
-- Real-time API consumption
+- Live weather data retrieval
 - Dashboard enhancement
+- Real-time API integration demonstration
 
-Displayed information includes:
+Displayed data includes:
 
 - Temperature
 - Weather condition
-- City context
+- City information
 
-This integration satisfies the public API requirement while improving practical dashboard utility.
+---
+
+## APIs Used
+
+### Internal REST APIs
+
+Authentication:
+
+```http
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/logout
+```
+
+Dashboard:
+
+```http
+GET /api/dashboard
+```
+
+Lead Management:
+
+```http
+GET /api/leads
+POST /api/leads
+PUT /api/leads/:id
+DELETE /api/leads/:id
+```
+
+AI:
+
+```http
+POST /api/ai/followup
+```
+
+---
+
+### External APIs
+
+OpenWeather API  
+Used to fetch live weather information displayed on the dashboard.
+
+Groq API  
+Used to generate AI-powered follow-up messaging.
 
 ---
 
@@ -231,11 +275,11 @@ Backend responsibilities:
 - Authentication logic
 - Authorization
 - Lead CRUD operations
-- Dashboard aggregation
-- AI integration endpoints
+- Dashboard analytics aggregation
+- AI API integration
 - Activity logging
+- Business validation
 - API orchestration
-- Validation handling
 
 ---
 
@@ -248,10 +292,9 @@ PostgreSQL (Neon)
 Database responsibilities:
 
 - Persistent lead storage
-- User account storage
-- Authentication support
-- Activity audit persistence
-- Relational data integrity
+- User authentication data
+- Audit trail persistence
+- Relational integrity management
 
 ---
 
@@ -277,12 +320,17 @@ Automation platform:
 
 GitHub Actions
 
-Pipeline coverage:
+Pipeline validation includes:
 
 - Frontend build validation
 - Frontend lint validation
-- Backend type validation
+- Backend type checking
 - Prisma client generation
+
+Trigger conditions:
+
+- Push to main branch
+- Pull requests
 
 ---
 
@@ -317,7 +365,7 @@ Pipeline coverage:
 
 ### Backend Architectural Design
 
-The backend follows a layered architecture to improve maintainability and scalability.
+The backend follows a layered architecture.
 
 ```text
 Routes
@@ -335,12 +383,12 @@ PostgreSQL
 
 Benefits:
 
-- Clear separation of concerns
-- Scalable code organization
+- Separation of concerns
+- Maintainability
+- Scalability
 - Easier debugging
-- Maintainable business logic
-- Improved readability
-- Better extensibility
+- Cleaner business logic boundaries
+- Extensibility
 
 ---
 
@@ -382,7 +430,7 @@ lead-management-dashboard/
 
 ### User
 
-Stores authenticated platform users.
+Stores authenticated users.
 
 Fields:
 
@@ -397,7 +445,7 @@ Fields:
 
 ### Lead
 
-Stores CRM lead information.
+Stores CRM lead records.
 
 Fields:
 
@@ -415,7 +463,7 @@ Fields:
 
 ### Activity
 
-Stores audit activity related to lead actions.
+Stores audit activity for lead lifecycle events.
 
 Fields:
 
@@ -427,75 +475,33 @@ Fields:
 
 ---
 
-## API Endpoints
+## Initial Access
 
-### Authentication
+The application currently does not include a dedicated frontend registration interface.
 
-Register
+Initial user creation should be performed through the backend registration endpoint using Postman or any API client.
 
-```http
-POST /api/auth/register
-```
-
-Login
+Hosted registration endpoint:
 
 ```http
-POST /api/auth/login
+POST https://lead-management-dashboard-jdif.onrender.com/api/auth/register
 ```
 
-Logout
+Example request body:
 
-```http
-POST /api/auth/logout
+```json
+{
+  "name": "Sangamesh",
+  "email": "test@example.com",
+  "password": "123456"
+}
 ```
 
----
+After successful registration:
 
-### Dashboard
-
-Dashboard Statistics
-
-```http
-GET /api/dashboard
-```
-
----
-
-### Lead Management
-
-Get Leads
-
-```http
-GET /api/leads
-```
-
-Create Lead
-
-```http
-POST /api/leads
-```
-
-Update Lead
-
-```http
-PUT /api/leads/:id
-```
-
-Delete Lead
-
-```http
-DELETE /api/leads/:id
-```
-
----
-
-### AI
-
-Generate Follow-Up Message
-
-```http
-POST /api/ai/followup
-```
+1. Open the frontend application
+2. Log in using the registered credentials
+3. Access the dashboard
 
 ---
 
@@ -584,7 +590,7 @@ http://localhost:5000
 
 ---
 
-## Deployment Configuration
+## Deployment Steps
 
 ### Frontend Deployment
 
@@ -602,6 +608,13 @@ Environment variable:
 ```env
 NEXT_PUBLIC_API_URL=https://lead-management-dashboard-jdif.onrender.com/api
 ```
+
+Deployment process:
+
+- Connect GitHub repository
+- Configure root directory
+- Add environment variable
+- Deploy production build
 
 ---
 
@@ -641,6 +654,13 @@ GROQ_API_KEY=
 OPENWEATHER_API_KEY=
 ```
 
+Deployment process:
+
+- Connect GitHub repository
+- Configure backend service
+- Add environment variables
+- Deploy production API
+
 ---
 
 ### Database Deployment
@@ -649,42 +669,44 @@ Platform:
 
 Neon PostgreSQL
 
-Purpose:
+Deployment process:
 
-Production relational database hosting.
+- Create hosted PostgreSQL instance
+- Copy connection string
+- Configure DATABASE_URL in backend environment
 
 ---
 
 ## Security Design
 
-Security controls implemented:
+Security implementation includes:
 
 - JWT authentication
-- Protected API access
+- Protected route access
 - Authorization middleware
 - Password hashing using bcrypt
 - Environment variable secret management
-- Production API URL isolation
-- Token-based request interception
+- Token-based API request authorization
+- Production environment API separation
 
 ---
 
 ## Validation Coverage
 
-Validation has been implemented across:
+Validation implemented across:
 
 - Authentication payloads
 - Lead creation
 - Lead updates
-- Protected route access
-- Token validation
+- Protected endpoint access
+- Token verification
 - Required field enforcement
 
 ---
 
 ## Testing Coverage
 
-Manual validation completed across:
+Manual validation completed for:
 
 - User registration
 - Login
@@ -695,25 +717,37 @@ Manual validation completed across:
 - Lead updates
 - Lead deletion
 - Search functionality
-- Filtering
+- Status filtering
 - Pagination
-- AI message generation
+- AI follow-up generation
 - Weather API integration
-- Production deployment validation
+- Hosted deployment verification
 
 ---
 
-## Engineering Notes
+## Assumptions / Notes
 
-Key implementation decisions:
+- The application assumes a single-user CRM workflow for assessment scope
+- Initial user creation is performed via backend registration endpoint
+- Protected application functionality requires authentication
+- AI response generation depends on external provider availability
+- Weather data depends on OpenWeather API uptime
+- Environment variables are required for both local and hosted execution
+- Cloud-hosted PostgreSQL is used for production persistence
+
+---
+
+## Engineering Decisions
+
+Implementation decisions:
 
 - Prisma ORM selected for type-safe database access
 - Layered backend architecture chosen for maintainability
-- React Query used for API state management
-- Groq API selected for efficient AI inference
-- Neon PostgreSQL used for cloud-hosted persistence
-- Render and Vercel selected for production deployment simplicity
-- CI/CD introduced for deployment confidence and automation
+- React Query selected for API state management
+- Groq selected for efficient AI inference
+- Neon PostgreSQL used for hosted relational persistence
+- Render and Vercel selected for deployment simplicity and production hosting
+- GitHub Actions introduced for automated validation and deployment confidence
 
 ---
 
@@ -728,4 +762,4 @@ https://www.linkedin.com/in/sangameshn191097
 
 ## Closing Note
 
-This project was developed as a practical demonstration of production-oriented full-stack engineering, combining secure authentication, modular architecture, cloud deployment, third-party integrations, AI functionality, and maintainable application design.
+This project was developed as a practical demonstration of production-oriented full-stack engineering, combining secure authentication, modular architecture, cloud deployment, third-party integrations, AI-assisted workflows, CI/CD automation, and maintainable application design.

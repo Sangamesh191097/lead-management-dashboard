@@ -749,14 +749,6 @@ Implementation decisions:
 - Render and Vercel selected for deployment simplicity and production hosting
 - GitHub Actions introduced for automated validation and deployment confidence
 
----
-
-## Author
-
-Sangamesh N
-
-LinkedIn  
-https://www.linkedin.com/in/sangameshn191097
 
 ---
 
